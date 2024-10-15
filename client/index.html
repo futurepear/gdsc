@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Community PDF Annotation Site</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+      function FilesView(props){
+        return (
+          <div class="main">
+
+            <header>
+              <h1>Website Title</h1>
+            </header>
+
+            <div class="flex-container">
+              <div id="sidebar">
+
+                //list group names here
+
+              </div>
+              <div id="files-region">
+                files-region
+              </div>
+            </div>
+
+          </div>
+        );
+      }
+    </script>
+
+    <script type="text/babel">
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+    </script>
+
+    <script type="text/babel">
+      var groups = ["MTH","ENGR"];
+      root.render(<FilesView groups={groups}/>);
+    </script>
+
+  </body>
+</html>

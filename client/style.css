@@ -1,0 +1,41 @@
+body{
+  padding: 0;
+  margin: 0;
+}
+
+header{
+}
+
+.main{
+  height:100vh;
+  width:100vw;
+  padding: 0;
+  margin: 0;
+}
+
+.flex-container{
+  display: flex;
+  height: 100%;
+  background-color: red;
+  padding: 0;
+  margin: 0;
+}
+
+#sidebar{
+  float: left;
+  width: 18vw;
+  background: rgb(129,113,175);
+  background: linear-gradient(90deg, rgba(129,113,175,1) 0%, rgba(146,129,197,1) 12%, rgba(255,255,255,1) 100%);
+  border-right: 2px solid;
+  border-color: #300076;
+  -webkit-box-shadow: 6px 7px 33px -5px rgba(0,0,0,0.75);
+-moz-box-shadow: 6px 7px 33px -5px rgba(0,0,0,0.75);
+box-shadow: 6px 7px 33px -5px rgba(0,0,0,0.75);
+  z-index: 1;
+}
+
+#files-region{
+  float: right;
+  width: 70vw;
+  background-color: white;
+}
