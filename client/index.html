@@ -12,26 +12,53 @@
 
     <script type="text/babel">
 
+      function GroupListItem(props) {
+        return(
+          <li class="unstyled_list">
+            <button class="group_list_item">
+              {props.name}
+            </button>
+          </li>
+        );
+      }
+
       function FilesView(props){
         return (
           <div class="main">
 
-            <header>
-              <h1>Website Title</h1>
-            </header>
+            <div class="flexbox navbar">
 
-            <div class="flex-container">
-              <div id="sidebar">
+                        <div class="navbar-item">
+                          <a href="#">orgname</a>
+                        </div>
 
-                //list group names here
+                        <div class="navbar-item">
+                          <p id="title">Dom&Adrian GDSC</p>
+                        </div>
 
-              </div>
-              <div id="files-region">
-                files-region
-              </div>
+                        <div class="navbar-item">
+                          <a class="navbar-item" href="#">username</a>
+                          <a class="navbar-item" href="#">logout</a>
+                        </div>
+
             </div>
 
-          </div>
+            <div class="flex-container">
+
+                        <div id="sidebar">
+                          <ul>
+                            {props.groups.map((name)=>(<GroupListItem name={name}/>))}
+                          </ul>
+
+                        </div>
+
+                        <div id="files-region">
+                          files-region
+                        </div>
+
+            </div>
+
+          </div> //close main
         );
       }
     </script>
@@ -42,7 +69,7 @@
     </script>
 
     <script type="text/babel">
-      var groups = ["MTH","ENGR"];
+      var groups = ["MTH","ENGR","Fitness","HTML","BOWLING"];
       root.render(<FilesView groups={groups}/>);
     </script>
 
