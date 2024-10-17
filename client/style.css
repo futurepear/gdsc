@@ -1,10 +1,11 @@
 body{
   padding: 0;
   margin: 0;
+  overflow: hidden;
 }
 
 .navbar{
-  height: 5vh;
+  height: auto;
   z-index: 2;
   position:relative;
   background-image: linear-gradient(90deg,#DDD,#FFF,#FFF,#DDD);
@@ -31,7 +32,6 @@ body{
 .flex-container{
   display: flex;
   height: 100%;
-  background-color: red;
   padding: 0;
   margin: 0;
 }
@@ -40,18 +40,18 @@ body{
   list-style-type: none;
   margin: 0;
   padding: 0;
-  text-align: right;
+  text-align: left;
   padding-right: 5%;
   padding-left: 0;
 }
 
 .group_list_item{
   border: none;
+  color: white;
   background-color: transparent;
   font-size: 2em;
-  transition: font-size, 0.5s;
+    transition: font-size, 0.5s;
   font-family: arial;
-  text-shadow: 0 0 20px #FFF;
 }
 
 .group_list_item:hover{
@@ -59,25 +59,109 @@ body{
     transition: font-size, 1s;
 }
 
+.files-region-header-item{
+  display: inline-block;
+  height : 100%;
+  vertical-align: middle;
+  margin-left: 1em;
+}
+
+.sorting-item{
+  color: #60059cff;
+  display: inline;
+  margin-left: 1em;
+}
+
+.files-region-header-buttons{
+  height: 2em;
+  width: 3em;
+}
+
+.files-list-box{
+  margin: 1em;
+  width:8em;
+  height:11em;
+  display: flex;
+  flex-direction: column;
+}
+
+.files-list-box:hover{
+  transform: scale(1.1);
+    transition: transform 0.1s;
+}
+
+.file-preview{
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+  margin: none;
+  border: 2px solid;
+  border-color: #60059cff;
+}
+
+.file-preview-title{
+  display: inline;
+  margin: 0;
+  color: #60059cff;
+}
+
+a{
+  text-decoration: none;
+}
+
+.file-preview-creator{
+  margin: 0;
+  font-size: 0.75em;
+  color: #60059cff
+}
+
+.file-preview-text-container{
+  margin-left: 0.3em;
+  margin-top: 0;
+  display: block;
+}
+
+#sorting-options-container{
+  float: right;
+  font-size: 2em;
+  vertical-align: bottom;
+}
+
+#grouplabel{
+  float: left;
+  padding-left: 0.25em;
+  padding-top: 0.5em;
+  font-size: 2em;
+  font-weight: bold;
+  color: #60059cff;
+}
+
+#files-region-header{
+  border-bottom: 4px solid;
+  border-color: #60059cff;
+  height: 3.8em;
+}
+
 #sidebar{
   float: left;
   width: 18vw;
   background: rgb(129,113,175);
-  background: linear-gradient(90deg, rgba(129,113,175,1) 0%, rgba(146,129,197,1) 12%, rgba(255,255,255,1) 100%);
-  border-right: 2px solid;
-  border-color: #300076;
-  -webkit-box-shadow: 6px 7px 33px -5px rgba(0,0,0,0.75);
-  -moz-box-shadow: 6px 7px 33px -5px rgba(0,0,0,0.75);
-  box-shadow: 6px 7px 33px -5px rgba(0,0,0,0.75);
+  background: linear-gradient(90deg, #60059cff 10%, rgba(96,5,156,0.4) 80%, rgba(96,5,156,0) 100%);
   z-index: 1;
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
 
+#files-subregion{
+  float: right;
+  width : 95%;
+}
+
 #files-region{
   float: right;
   width: 70vw;
+  overflow: hidden;
   background-color: white;
 }
 
@@ -86,4 +170,14 @@ body{
   padding: 0;
   font-size: 1.2em;
   vertical-align: top;
+}
+
+#files-list-container{
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  max-height: 85vh;
+  width: 100%;
+  overflow-y: auto;
+  align-items: stretch;
 }

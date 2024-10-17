@@ -15,33 +15,47 @@
       function GroupListItem(props) {
         return(
           <li class="unstyled_list">
-            <button class="group_list_item">
+            <a class="group_list_item" href="#">
               {props.name}
-            </button>
+            </a>
           </li>
         );
+      }
+
+      function FileListBox(props){
+        return(
+          <a href="#">
+            <div class="files-list-box">
+              <img class="file-preview" src="https://picsum.photos/id/870/200/300?grayscale&blur=2" alt="file preview"></img>
+              <div class="file-preview-text-container">
+                <p class="file-preview-title">{props.file.title}</p>
+                <p class="file-preview-creator">{props.file.creator}</p>
+              </div>
+            </div>
+          </a>
+        )
       }
 
       function FilesView(props){
         return (
           <div class="main">
 
-            <div class="flexbox navbar">
+              <div class="flexbox navbar">
 
-                        <div class="navbar-item">
-                          <a href="#">orgname</a>
-                        </div>
+                          <div class="navbar-item">
+                            <a href="#">orgname</a>
+                          </div>
 
-                        <div class="navbar-item">
-                          <p id="title">Dom&Adrian GDSC</p>
-                        </div>
+                          <div class="navbar-item">
+                            <p id="title">Dom&Adrian GDSC</p>
+                          </div>
 
-                        <div class="navbar-item">
-                          <a class="navbar-item" href="#">username</a>
-                          <a class="navbar-item" href="#">logout</a>
-                        </div>
+                          <div class="navbar-item">
+                            <a class="navbar-item" href="#">username</a>
+                            <a class="navbar-item" href="#">logout</a>
+                          </div>
 
-            </div>
+                </div>
 
             <div class="flex-container">
 
@@ -53,7 +67,25 @@
                         </div>
 
                         <div id="files-region">
-                          files-region
+                              <div id="files-subregion">
+
+                                      <div id="files-region-header">
+                                          <div class="files-region-header-item" id="grouplabel">
+                                              Groupname: Files
+                                          </div>
+
+                                          <div class="files-region-header-item" id="sorting-options-container">
+                                              <p class="sorting-item">Sort</p>
+                                              <button class="sorting-item files-region-header-buttons">A-Z</button>
+                                              <button class="sorting-item files-region-header-buttons" id="sort-direction-toggle">⬇</button>
+                                          </div>
+                                      </div>
+
+                                      <div id="files-list-container">
+                                          {props.files.map((file)=>(<FileListBox file={file}/>))}
+                                      </div>
+
+                              </div>
                         </div>
 
             </div>
@@ -66,11 +98,41 @@
     <script type="text/babel">
       const container = document.getElementById('root');
       const root = ReactDOM.createRoot(container);
+
     </script>
 
     <script type="text/babel">
       var groups = ["MTH","ENGR","Fitness","HTML","BOWLING"];
-      root.render(<FilesView groups={groups}/>);
+      var files = [
+      {title:"Polynomials",creator:"Adrian"},
+      {title:"Derivatives",creator:"Jaundice Infection"},
+      {title:"RAM Allocation",creator:"Jurgen Windcaller"},
+      {title:"Polynomials",creator:"Adrian"},
+      {title:"Derivatives",creator:"Jaundice Infection"},
+      {title:"RAM Allocation",creator:"Jurgen Windcaller"},
+      {title:"Polynomials",creator:"Adrian"},
+      {title:"Derivatives",creator:"Jaundice Infection"},
+      {title:"RAM Allocation",creator:"Jurgen Windcaller"},
+      {title:"Polynomials",creator:"Adrian"},
+      {title:"Derivatives",creator:"Jaundice Infection"},
+      {title:"RAM Allocation",creator:"Jurgen Windcaller"},
+      {title:"Polynomials",creator:"Adrian"},
+      {title:"Derivatives",creator:"Jaundice Infection"},
+      {title:"RAM Allocation",creator:"Jurgen Windcaller"},
+      {title:"Polynomials",creator:"Adrian"},
+      {title:"Derivatives",creator:"Jaundice Infection"},
+      {title:"RAM Allocation",creator:"Jurgen Windcaller"},
+      {title:"Polynomials",creator:"Adrian"},
+      {title:"Derivatives",creator:"Jaundice Infection"},
+      {title:"RAM Allocation",creator:"Jurgen Windcaller"},
+      {title:"Polynomials",creator:"Adrian"},
+      {title:"Derivatives",creator:"Jaundice Infection"},
+      {title:"RAM Allocation",creator:"Jurgen Windcaller"},
+      {title:"Polynomials",creator:"Adrian"},
+      {title:"Derivatives",creator:"Jaundice Infection"},
+      {title:"RAM Allocation",creator:"Jurgen Windcaller"}
+      ];
+      root.render(<FilesView groups={groups} files={files}/>);
     </script>
 
   </body>
