@@ -7,15 +7,15 @@
     <link rel="stylesheet" href="style.css">
     <title>Community PDF Annotation Site</title>
   </head>
-  <body>
+  <body id="lines-background">
     <div id="root"></div>
 
     <script type="text/babel">
 
-      function GroupListItem(props) {
+      function GroupListItem(props){
         return(
           <li class="unstyled_list">
-            <a class="group_list_item" href="#">
+            <a class="group_list_item" href="./index.html">
               {props.name}
             </a>
           </li>
@@ -24,7 +24,8 @@
 
       function FileListBox(props){
         return(
-          <a href="#">
+        <>
+          <a id = "a-button" href="./editor.html">
             <div class="files-list-box">
               <img class="file-preview" src="https://picsum.photos/id/870/200/300?grayscale&blur=2" alt="file preview"></img>
               <div class="file-preview-text-container">
@@ -33,6 +34,7 @@
               </div>
             </div>
           </a>
+        </>
         )
       }
 
@@ -52,7 +54,7 @@
 
                           <div class="navbar-item">
                             <a class="navbar-item" href="#">username</a>
-                            <a class="navbar-item" href="#">logout</a>
+                            <a class="navbar-item" href="./login.html">login</a>
                           </div>
 
                 </div>
@@ -60,8 +62,14 @@
             <div class="flex-container">
 
                         <div id="sidebar">
+                          <h2 class="sidebar-header">Courses</h2>
                           <ul>
-                            {props.groups.map((name)=>(<GroupListItem name={name}/>))}
+                            {props.classes.map((name)=>(<GroupListItem name={name}/>))}
+                          </ul>
+
+                          <h2 class="sidebar-header">Categories</h2>
+                          <ul>
+                            {props.categories.map((name)=>(<GroupListItem name={name}/>))}
                           </ul>
 
                         </div>
@@ -93,6 +101,7 @@
           </div> //close main
         );
       }
+
     </script>
 
     <script type="text/babel">
@@ -102,37 +111,23 @@
     </script>
 
     <script type="text/babel">
-      var groups = ["MTH","ENGR","Fitness","HTML","BOWLING"];
+      var classes = ["MTH","ENGR","Fitness","HTML","BOWLING"];
+      var categories = ["Calculus","Physics","Science","Writing"];
       var files = [
-      {title:"Polynomials",creator:"Adrian"},
-      {title:"Derivatives",creator:"Jaundice Infection"},
-      {title:"RAM Allocation",creator:"Jurgen Windcaller"},
-      {title:"Polynomials",creator:"Adrian"},
-      {title:"Derivatives",creator:"Jaundice Infection"},
-      {title:"RAM Allocation",creator:"Jurgen Windcaller"},
-      {title:"Polynomials",creator:"Adrian"},
-      {title:"Derivatives",creator:"Jaundice Infection"},
-      {title:"RAM Allocation",creator:"Jurgen Windcaller"},
-      {title:"Polynomials",creator:"Adrian"},
-      {title:"Derivatives",creator:"Jaundice Infection"},
-      {title:"RAM Allocation",creator:"Jurgen Windcaller"},
-      {title:"Polynomials",creator:"Adrian"},
-      {title:"Derivatives",creator:"Jaundice Infection"},
-      {title:"RAM Allocation",creator:"Jurgen Windcaller"},
-      {title:"Polynomials",creator:"Adrian"},
-      {title:"Derivatives",creator:"Jaundice Infection"},
-      {title:"RAM Allocation",creator:"Jurgen Windcaller"},
-      {title:"Polynomials",creator:"Adrian"},
-      {title:"Derivatives",creator:"Jaundice Infection"},
-      {title:"RAM Allocation",creator:"Jurgen Windcaller"},
-      {title:"Polynomials",creator:"Adrian"},
-      {title:"Derivatives",creator:"Jaundice Infection"},
-      {title:"RAM Allocation",creator:"Jurgen Windcaller"},
       {title:"Polynomials",creator:"Adrian"},
       {title:"Derivatives",creator:"Jaundice Infection"},
       {title:"RAM Allocation",creator:"Jurgen Windcaller"}
       ];
-      root.render(<FilesView groups={groups} files={files}/>);
+
+      function App(){
+        return <FilesView classes={classes} files={files} categories={categories}/>
+      }
+
+      function OpenFile(){
+        console.log("jello");
+      }
+
+      root.render(<App/>);
     </script>
 
   </body>

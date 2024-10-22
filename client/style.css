@@ -1,7 +1,18 @@
 body{
+  overflow: hidden;
+}
+
+#lines-background{
   padding: 0;
   margin: 0;
-  overflow: hidden;
+  background-image: url("../images/background.svg");
+  background-position: right;
+  background-size: cover;
+}
+
+#files-background{
+  padding: 0;
+  margin: 0;
   background-image: url("../images/background.svg");
   background-position: right;
   background-size: cover;
@@ -27,7 +38,7 @@ body{
 
 .main{
   height:100vh;
-  width:100vw;
+  width:100%;
   padding: 0;
   margin: 0;
 }
@@ -41,7 +52,7 @@ body{
 
 .unstyled_list{
   list-style-type: none;
-  margin: 0;
+  margin-top: 0;
   padding: 0;
   text-align: left;
   padding-right: 5%;
@@ -52,14 +63,9 @@ body{
   border: none;
   color: white;
   background-color: transparent;
-  font-size: 2em;
+  font-size: 1.4em;
     transition: font-size, 0.5s;
   font-family: arial;
-}
-
-.group_list_item:hover{
-  font-size: 4em;
-    transition: font-size, 1s;
 }
 
 .files-region-header-item{
@@ -190,4 +196,28 @@ a{
 #files-list-container::-webkit-scrollbar{
   background-color: #60059cff;
   scrollbar-color: #60059cff;
+}
+
+#login-panel{
+  background-color: white;
+  display: block;
+  width: 60vw;
+  height: 35vw;
+  -webkit-box-shadow: 0px 0px 24px 7px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 24px 7px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 24px 7px rgba(0,0,0,0.75);
+}
+
+.sidebar-header{
+  color: white;
+  margin-left: 1em;
+  margin-bottom: 0;
+  font-size: 2em;
+}
+
+.center-contents{
+  justify-content: center;
+  align-items: center
+}
+
 }

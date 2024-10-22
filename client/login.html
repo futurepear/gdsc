@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Community PDF Annotation Site</title>
+  </head>
+  <body id="files-background">
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+      function LoginScreen(){
+        return (
+          <div class="main">
+              <div class="flex-container center-contents">
+                <div id="login-panel">
+                  <div id="login-header">
+                    header
+                  </div>
+                  <div id="login-body">
+                    <div id="graphic-box">
+                      graphic
+                    </div>
+                    <div id="login-input">
+                      input
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        );
+      }
+
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+      root.render(<LoginScreen/>);
+  </script>
+
+  </body>
+</html>
