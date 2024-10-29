@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
+    <title>Document</title>
+
+</head>
+<body>
+
+   
+    <script>
+
+        const { PDFDocument, StandardFonts, rgb } = PDFLib;
+
+        async function guh(){
+            const pdfdoc = await PDFDocument.create();
+
+            const timesRomanFont = await pdfdoc.embedFont(StandardFonts.TimesRoman)
+
+            const page = pdfdoc.addPage();
+            const { width, height } = page.getSize();
+            const fontSize = 50;
+            page.drawText('a', {
+                x: 50,
+                y: 70,
+                size: fontSize,
+                font: timesRomanFont,
+                color: PDFLib.rgb(1, 0, 0)
+            });
+
+            const pdfBytes = await pdfdoc.save();
+            let a = new Blob(pdfBytes, {
+                type: "application/pdf",
+            });
+            console.log(btoa(await a.text()));
+            
+        }
+        guh();
+
+    </script>
+</body>
+</html>
