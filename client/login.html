@@ -6,6 +6,9 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Community PDF Annotation Site</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
   </head>
   <body id="files-background">
 
@@ -18,15 +21,25 @@
           <div class="main">
               <div class="flex-container center-contents">
                 <div id="login-panel">
-                  <div id="login-header">
-                    header
-                  </div>
-                  <div id="login-body">
-                    <div id="graphic-box">
-                      graphic
+                  <div id="login-header" class="flex-item">
+                    <p>PDFapp</p>
+                    <div id="login-horizontal-list">
+                      <a href="#">community</a>
+                      <a href="#">about</a>
+                      <a href="#">contact</a>
                     </div>
-                    <div id="login-input">
-                      input
+                  </div>
+                  <div id="login-body" class="flex-item">
+                    <div id="graphic-box">
+                      <div id="purple-thing"></div>
+                    </div>
+                    <div id="login-input-box">
+                      <div id="login-input">
+                        <p class="purple-text-thin text-larger">Wecome Back</p>
+                        <p class="purple-text-thin">Sign in</p>
+                        <button id="placeholder-google-login">google</button>
+                        <p class="purple-text-thin text-small">No account? Sign up</p>
+                      </div>
                     </div>
                   </div>
                 </div>

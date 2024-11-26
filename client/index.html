@@ -6,6 +6,9 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Community PDF Annotation Site</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
   </head>
   <body id="lines-background">
     <div id="root"></div>
@@ -111,16 +114,23 @@
     </script>
 
     <script type="text/babel">
-      var classes = ["MTH","ENGR","Fitness","HTML","BOWLING"];
-      var categories = ["Calculus","Physics","Science","Writing"];
-      var files = [
-      {title:"Polynomials",creator:"Adrian"},
-      {title:"Derivatives",creator:"Jaundice Infection"},
-      {title:"RAM Allocation",creator:"Jurgen Windcaller"}
-      ];
 
       function App(){
-        return <FilesView classes={classes} files={files} categories={categories}/>
+        var data = getData();
+        return <FilesView classes={data.classes} files={data.files} categories={data.categories}/>
+      }
+
+      function getData(){
+        return {
+          "success":true,
+          "classes":["MTH","ENGR","Fitness","HTML","BOWLING"],
+          "files":[
+            {title:"Polynomials",creator:"Adrian"},
+            {title:"Derivatives",creator:"Jaundice Infection"},
+            {title:"RAM Allocation",creator:"Jurgen Windcaller"}
+          ],
+          "categories":["Calculus","Physics","Science","Writing"]
+        };
       }
 
       function OpenFile(){
@@ -128,6 +138,8 @@
       }
 
       root.render(<App/>);
+
+
     </script>
 
   </body>
