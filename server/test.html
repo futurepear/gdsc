@@ -39,6 +39,33 @@
         }
         guh();
 
+        /*
+        fetch("/api/createAccount", {
+    method: "POST",
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(
+        {
+            name: "test",
+            username: "testusername"
+        }
+    )
+});
+        
+        
+        */
+
+        function login() {
+            fetch("/api/login", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: "" })
+            });
+        }
+
     </script>
 </body>
 </html>

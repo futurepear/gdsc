@@ -10,16 +10,13 @@ const cookieParser = require('cookie-parser');
 const { neon } = require('@neondatabase/serverless');
 const sql = neon(`postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}/${process.env.PGDATABASE}?sslmode=require`);
 
-const accounts = require("./accounts.js");
+const db = require("./db.js");
 
 async function getPgVersion() {
     const result = await sql`SELECT version()`;
     console.log(result[0]);
 }
 getPgVersion();
-
-
-getUserInfo("a");
 
 
 // support parsing of application/json type post data
@@ -38,16 +35,44 @@ app.get("/", (req, res) => {
 });
 
 //POST REQUESTS - ALL THE API IS HERE
-app.post("/api/createAccount", (req, res) => {
+app.post("/api/createAccount", async (req, res) => {
     let data = req.body;
-    account.createAccount(sql, data.name, data.username);
+    //check 1 - valid input?
+    if (data.name == null || data.username == null) {
+        console.log("Invalid input", data);
+        return res.end(JSON.stringify({ "success": false, "reason": "Invalid input" }));
+    }
+    //check 2 - does user exist
+    let acc = await db.getUser(sql, data.username);
+    if (acc.length > 0) {
+        console.log("user exists", data);
+        return res.end(JSON.stringify({ "success": false, "reason": "Username in use" }));
+    }
+
+    await db.createAccount(sql, data.name, data.username);
+    return res.end(JSON.stringify({ "success": true, "reason": "GOod job!!" }));
 });
 
 app.post("/dev/login", async (req, res) => {
+    let data = req.body; //{username: string}
+    //check 1 - valid input 
+    if (data.username == null) {
+        return res.end(JSON.stringify({ "success": false, "reason": "Invalid input" }));
+    }
+    //check 2 - does user exist?
+    let acc = (await db.getUser(sql, data.username))[0];
+    if (acc == null) return res.end(JSON.stringify({ "success": false, "reason": "bruh dis account no exist" }));
+    //check 3: for non dev login: check password
 
+    //login success: set cookies
+    let session = Buffer.from(data.username + "." + uuidv4()).toString('base64');
+    res.cookie("session", session);
+    res.end(JSON.stringify({ "success": true, "reason": "GOod job!!" }));   
+    db.setSession(sql, data.username, session);
 });
 
 app.listen(3000);
 
-accounts.createAccount(sql);
-
+//db.createUsersTable(sql);
+//db.createAccount(sql);
+//db.createFilesTable(sql);
