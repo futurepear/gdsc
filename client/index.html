@@ -10,12 +10,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/mainPage.css">
 </head>
 <body>
 
     <div id="outer" class="col">
         <div id="navbar" class="flex" style="align-items: center;">
-            <h1 class="purpletext" style="line-height: 0px; margin-left: 20px;">APP</h1>
+            <h1 class="purpletext" style="line-height: 0px; margin-left: 20px;">PDFapp</h1>
+            <div class="filler"></div>
+            <div style="height: 65%; aspect-ratio: 1/1; border-radius: 100%;" class="purplebg"></div>
+            <div style="width: 20px;"></div>
         </div>
         <div id="content" class="flex">
             <div id="nav" class="col" style="align-items: center;">
@@ -44,9 +48,10 @@
                 <div id="filesNav" class="flex" style="align-items: center; gap: 10px;">
                     <h1 class="purpletext">Files</h1> <div class="filler"></div> <p class="purpletext">Sort</p> <button class="button">A-Z</button> <button class="button">></button>
                 </div>
-                <hr class="purplebg"/>
-                <div id="files">
-
+                <hr class="purplebg" />
+                <div id="filesWrapper">
+                    <div id="files">
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,5 +59,7 @@
 
     <canvas id="canvas"></canvas>
 
+    <script src="./js/main.js"></script>
+    <script src="./js/index.js"></script>
 </body>
 </html>

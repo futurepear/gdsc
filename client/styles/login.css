@@ -1,0 +1,63 @@
+body {
+    
+}
+#outer {
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(135deg, #60059cff, #16059cff);
+}
+
+#content {
+    width: 55%;
+    height: 65%;
+    z-index: 10;
+    background: linear-gradient(180deg, rgba(255,255,255,1.0), rgba(255,255,255,0.0));
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+}
+
+#nav{
+    max-height: 70px;
+    width: 100%;
+    height: 10%;
+}
+#stuff{
+    flex: 1;
+    width: 100%;
+
+}
+.grad1 {
+    background-image: url("../img/untitled.png"), linear-gradient(90deg, #2b035dff, rgba(0,0,0,0));
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: contain;
+}
+.grad2 {
+    background: linear-gradient(0deg, #16059c3f, rgba(0,0,0,0));
+}
+#loginArea{
+    width: 90%;
+    height: 90%;
+}
+#loginArea h1{
+    margin: 0;
+    font-weight: 400;
+}
+#loginArea h2{
+    margin: 0;
+    margin-bottom: 10px;
+    font-weight: 200;
+}
+#dummy{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+}
+#dummyInner {
+    width: 55%;
+    height: 65%;
+    background: rgba(255, 255, 255, 0.9);
+}
