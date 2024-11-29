@@ -19,6 +19,11 @@ async function getUser(sql, username) {
     const result = await sql`SELECT * FROM users WHERE username=${username}`;
     return result;
 }
+async function getUserBySession(sql, token) {
+    const result = await sql`SELECT * FROM users WHERE session=${token}`;
+    return result;
+}
+
 async function createUsersTable(sql) {
     const a = await sql`DROP TABLE users;`;
 
@@ -67,4 +72,4 @@ const encrypt = {
     }
 }
 
-module.exports = { createAccount, sqlDate, getUser, createUsersTable, setSession, createFilesTable, createFile, encrypt };
+module.exports = { createAccount, sqlDate, getUser, createUsersTable, setSession, createFilesTable, createFile, encrypt, getUserBySession };

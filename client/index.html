@@ -8,45 +8,51 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/mainPage.css">
+    <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
 
     <div id="outer" class="col">
-        <div id="navbar" class="flex" style="align-items: center;">
+        <div id="navbar" class="flex" style="align-items: center; gap: 10px;">
             <h1 class="purpletext" style="line-height: 0px; margin-left: 20px;">PDFapp</h1>
             <div class="filler"></div>
             <div style="height: 65%; aspect-ratio: 1/1; border-radius: 100%;" class="purplebg"></div>
-            <div style="width: 20px;"></div>
+            <p class="purpletext" id="username" style=""> </p>
+            <p class="purpletext point" id="logout" onclick="logout()">Log Out</p>
+            <p class="purpletext point" id="login" onclick="gotologin()">Log in</p>
         </div>
         <div id="content" class="flex">
             <div id="nav" class="col" style="align-items: center;">
                 <div style="height: 20px;"></div>
-                <input type="text" placeholder="Search..." class="search" style="width: 80%;" />
+                <div class="flex" style="width: 80%;">
+                    <input type="text" placeholder="Search..." class="search" style="flex: 1;" />
+                    <div class="search2">
+                        <i class="bi bi-search"></i>
+                    </div>
+                </div>
                 <hr class="whitebg" />
                 <div style="width: 80%;" class="flex col">
-                    <h2 class="category">Category</h2>
-                    <p class="subcategory">Subcategory</p>
-                    <p class="subcategory">Subcategory</p>
-                    <p class="subcategory">Subcategory</p>
-                    <p class="subcategory">Subcategory</p>
-                    <p class="subcategory">Subcategory</p>
-                    <p class="subcategory">Subcategory</p>
-                    <h2 class="category">Category</h2>
-                    <p class="subcategory">Subcategory</p>
-                    <p class="subcategory">Subcategory</p>
-                    <p class="subcategory">Subcategory</p>
-                    <h2 class="category">Category</h2>
-                    <p class="subcategory">Subcategory</p>
-                    <p class="subcategory">Subcategory</p>
-                    <p class="subcategory">Subcategory</p>
+                    <h2 class="category">Categories</h2>
+                    <p class="subcategory">Chemistry</p>
+                    <p class="subcategory">Computer Science</p>
+                    <p class="subcategory">Mathematics</p>
+                    <p class="subcategory">Physics</p>
+                    <h2 class="category">Courses</h2>
+                    <p class="subcategory" style="text-decoration: underline;">Add a course...</p>
+                    <h2 class="category">Personal</h2>
+                    <p class="subcategory">My files</p>
                 </div>
             </div>
             <div id="filesOuter" class="col">
                 <div id="filesNav" class="flex" style="align-items: center; gap: 10px;">
-                    <h1 class="purpletext">Files</h1> <div class="filler"></div> <p class="purpletext">Sort</p> <button class="button">A-Z</button> <button class="button">></button>
+                    <h1 class="purpletext" id="explore">Explore Files</h1>
+                    <div class="filler"></div>
+                    <button class="button3 point">Create</button>
+                    <div class="filler"></div> 
+                    <p class="purpletext">Sort</p> <button class="button">A-Z</button> <button class="button">></button>
                 </div>
                 <hr class="purplebg" />
                 <div id="filesWrapper">

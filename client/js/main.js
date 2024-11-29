@@ -20,6 +20,14 @@ function clamp(x, min, max) {
 function mod(a, b) {
     return ((a % b) + b) % b;
 }
+function logout() {
+    document.cookie.split(";").forEach(cookie => {
+        let a = cookie.indexOf("=");
+        let name = a > -1 ? cookie.substring(0, a) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    });
+    window.location.reload();
+}
 
 function drawCoolThing(x, y, slope = 0, seed = 0, alphaFactor = 3) {
     let t = Date.now() / 1000;

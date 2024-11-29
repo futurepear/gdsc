@@ -1,0 +1,22 @@
+
+#canvas {
+    z-index: 10;
+    background-image: linear-gradient(135deg, #60059cff, #16059cff);
+}
+#outer{
+    height: 100vh;
+}
+#content{
+    height: 100%;
+}
+#editor {
+    aspect-ratio: 612/792;
+    background: white;
+    height: 90%;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+}
+.tools{
+    padding: 10px;
+    border-radius: 20px;
+    margin: 20px;
+}

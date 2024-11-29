@@ -33,6 +33,9 @@ app.use(express.static(path.join(__dirname, "../client")));
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/index.html"));
 });
+app.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/login.html"));
+});
 
 //POST REQUESTS - ALL THE API IS HERE
 app.post("/api/createAccount", async (req, res) => {
@@ -51,6 +54,19 @@ app.post("/api/createAccount", async (req, res) => {
 
     await db.createAccount(sql, data.name, data.username, data.pass);
     return res.end(JSON.stringify({ "success": true, "reason": "GOod job!!" }));
+});
+
+app.get("/api/my-info", async (req, res) => {
+    let session = req.cookies["session"];
+    let info = { loggedin: false, name: null };
+    if (session == null) return res.send(JSON.stringify(info));
+
+    let acc = (await db.getUserBySession(sql, session))[0];
+    if (acc !== null) {
+        info.loggedin = true;
+        info.name = acc.username;
+    }
+    return res.send(JSON.stringify(info));
 });
 
 app.post("/api/login", async (req, res) => {
