@@ -1,8 +1,8 @@
 const { v4: uuidv4 } = require("uuid");
-
-async function createAccount(sql, name, username) {
-    const result = await sql`INSERT INTO users(username, name, created, session)
-        VALUES (${username}, ${name}, ${sqlDate()}, ${uuidv4()});
+const bcrypt = require("bcrypt");
+async function createAccount(sql, name, username, pass) {
+    const result = await sql`INSERT INTO users(username, name, hash, created, session)
+        VALUES (${username}, ${name}, ${await encrypt.hash(pass)}, ${sqlDate()}, ${uuidv4()});
     `;
     return true;
 }
@@ -26,6 +26,7 @@ async function createUsersTable(sql) {
         uuid SERIAL PRIMARY KEY,
         username VARCHAR(30),
         name char(30),
+        hash char(60),
         created DATE,
         session VARCHAR(100)
     )`;
@@ -53,6 +54,17 @@ async function createFile(sql, title, author, course, category, data) {
 }
 function sqlDate() {
     return new Date().toISOString().slice(0, 19).replace("T", " ");
+} 
+
+const encrypt = {
+    hash: async (password) => {
+        let salt = 10;
+        const hashed = await bcrypt.hash(password, salt);
+        return hashed;
+    },
+    compare: async (pass, hashedPass) => {
+        return await bcrypt.compare(pass, hashedPass);
+    }
 }
 
-module.exports = { createAccount, sqlDate, getUser, createUsersTable, setSession, createFilesTable, createFile };
+module.exports = { createAccount, sqlDate, getUser, createUsersTable, setSession, createFilesTable, createFile, encrypt };

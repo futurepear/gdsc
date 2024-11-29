@@ -9,6 +9,9 @@ filePNG.src = "./img/file.png";
 function mix(a, b, t) {
     return a * t + (1 - t) * b;
 }
+function $(x) {
+    return document.getElementById(x);
+}
 function clamp(x, min, max) {
     if (x < min) return min;
     if (x > max) return max;

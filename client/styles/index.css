@@ -15,7 +15,6 @@
 
 body {
     margin: 0;
-
 }
 
 hr {
@@ -45,6 +44,10 @@ hr {
     color: #300076ff;
 }
 
+.purpletext2 {
+    color: #4d3b68;
+}
+
 .button {
     background: #DDD1E4;
     color: #300076ff;
@@ -52,18 +55,56 @@ hr {
     border-radius: 5px;
 }
 
+.button2 {
+    background: #DDD1E4;
+    color: #300076ff;
+    border: 1.5px solid #300076ff;
+    border-radius: 5px;
+    width: 50%;
+    padding: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+    .button2:hover {
+        background: #ceabe2;
+    }
+
 .search {
     background: white;
     border: 1.5px solid #300076ff;
     border-radius: 15px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 5px;
+    padding-left: 10px;
 }
-#canvas{
+
+.input {
+    background: white;
+    border: 1.5px solid #300076ff;
+    border-radius: 15px;
+    padding: 5px;
+    padding-left: 10px;
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+#canvas {
     position: absolute;
     top: 0px;
     left: 0px;
     width: 100vw;
     height: 100vh;
     z-index: -1;
+}
+
+.smalltext {
+    margin: 0;
+    font-weight: 700;
+    font-size: 0.8em;
+}
+#error{
+    color: darkred;
+    margin: 0;
+    font-size: 0.8em;
+    font-weight: bold;
 }
