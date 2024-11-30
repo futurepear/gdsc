@@ -28,6 +28,9 @@ function populateFiles() {
     for (let i = 0; i < 50; i++)
         addFile();
 }
+function create() {
+    window.location.href = "/editor#upload"
+}
 
 populateFiles();
 updateUser();

@@ -47,13 +47,13 @@ async function createFilesTable(sql) {
         created DATE,
         class VARCHAR(100),
         category VARCHAR(100),
-        data char(10)
+        file VARCHAR(100)
     )`;
     console.log(result);
 }
-async function createFile(sql, title, author, course, category, data) {
-    const result = await sql`INSERT INTO users(title, author, created, class, category, data)
-        VALUES (${title}, ${author}, ${sqlDate()}, ${course}, ${category}, ${data});
+async function createFile(sql, title, author, course, category, file) {
+    const result = await sql`INSERT INTO files(title, author, created, class, category, file)
+        VALUES (${title}, ${author}, ${sqlDate()}, ${course}, ${category}, ${file});
     `;
     return result;
 }

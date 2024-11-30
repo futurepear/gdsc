@@ -4,8 +4,11 @@ const { v4: uuidv4 } = require('uuid');
 const path = require("path");
 const express = require("express");
 const app = express();
+const http = require("http");
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const R2 = require("./r2.js");
+
 
 const { neon } = require('@neondatabase/serverless');
 const sql = neon(`postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}/${process.env.PGDATABASE}?sslmode=require`);
@@ -21,7 +24,8 @@ getPgVersion();
 
 // support parsing of application/json type post data
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); //support parsing of forms or someting idk kinda useless tbh
+app.use(bodyParser.raw({type: 'image/png', limit: '5mb'}));
+app.use(bodyParser.urlencoded({limit: '2mb',  extended: true })); //support parsing of forms or someting idk kinda useless tbh
 app.use((err, req, res, next) => { //catch body parser errors
     if (err) { console.log(err); } else { next() }
 });
@@ -35,6 +39,39 @@ app.get("/", (req, res) => {
 });
 app.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/login.html"));
+});
+app.get("/editor", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/editor.html"));
+});
+app.get("/image", async (req, res) => {
+    res.redirect(process.env.CDN_URL+"/poire.png");
+    return;
+    
+    res.writeHead(200, { 'Content-Type': 'image/png' });
+    let data = await R2.getImage("");
+    for (let i = 0; i < data.length; i++)
+        res.write(data[i]);
+    res.end();
+    
+});
+app.post("/uploadFile", async (req, res) => {
+    let user = await userFromSession(req);
+    if (user == null) return;
+
+    let title = req.query.title;
+
+    let file = "/pdfapp/files/" + uuidv4() + "/base.png";
+    let result = db.createFile(sql, title, user.username, null, null, file);
+    
+    let response = await fetch(process.env.CDN_URL + file, {
+        method: "PUT",
+        headers: {
+            "X-Custom-Auth-Key": process.env.R2_SECRET_ACCESS_KEY,
+            "Content-Type": "image/png"
+        },
+        body: req.body
+    });
+    console.log(await response.text());
 });
 
 //POST REQUESTS - ALL THE API IS HERE
@@ -55,6 +92,13 @@ app.post("/api/createAccount", async (req, res) => {
     await db.createAccount(sql, data.name, data.username, data.pass);
     return res.end(JSON.stringify({ "success": true, "reason": "GOod job!!" }));
 });
+
+async function userFromSession(req) {
+    let session = req.cookies["session"];
+    if (session == null) return null;
+    let acc = (await db.getUserBySession(sql, session))[0];
+    return acc;
+}
 
 app.get("/api/my-info", async (req, res) => {
     let session = req.cookies["session"];

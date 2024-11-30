@@ -54,15 +54,41 @@ function toCanvasSpace(pos) {
         y: (pos.y - editorCanvas.offsetTop) / editorCanvas.offsetHeight * editorCanvas.height
     };
 }
+
+let stroke = [];
+
+function renderStroke(s) {
+    ectx.beginPath();
+    ectx.moveTo(s[0].x, s[1].y);
+    for (let i = 1; i < s.length; i++) {
+        ectx.quadraticCurveTo((s[i].x + s[i - 1].x) / 2, (s[i].y + s[i - 1].y) / 2, s[i].x, s[i].y);
+    }
+    ectx.stroke();
+}
 function draw(pos) {
-    ectx.fillRect(pos.x, pos.y, 5, 5);
+    if (stroke.length > 0 && Math.hypot(stroke[stroke.length - 1].x - pos.x, stroke[stroke.length - 1].y - pos.y) < 2) return;
+    stroke.push(pos);
+    renderStroke(stroke);
 }
 
 document.addEventListener("mousemove", (e) => {
     draw(toCanvasSpace({ x: e.clientX, y: e.clientY }));
 });
 
+window.upload = async () => {
+ 
 
+    editorCanvas.toBlob((blob) => {
+        console.log(blob);
+        fetch(`/uploadFile?title=TEST`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'image/png'
+            },
+            body: blob
+        })
+    });
+}
 
 
 function render(alpha) {
