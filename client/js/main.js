@@ -5,7 +5,7 @@ canvas.width = 1920;
 canvas.height = 1080;
 
 let filePNG = new Image();
-filePNG.src = "./img/file.png";
+filePNG.src = "/img/file.png";
 function mix(a, b, t) {
     return a * t + (1 - t) * b;
 }
@@ -26,7 +26,12 @@ function logout() {
         let name = a > -1 ? cookie.substring(0, a) : cookie;
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     });
+    localStorage.removeItem("username");
     window.location.reload();
+    
+}
+function gotologin() {
+    window.location.href = "/login"
 }
 
 function drawCoolThing(x, y, slope = 0, seed = 0, alphaFactor = 3) {
@@ -71,4 +76,11 @@ function drawFilesMoving(alpha = 0.25, falloff = 0, v = 20) {
             ctx.drawImage(filePNG, size * i, mod((size+20) * j + t * v*dir, canvas.height + size)-size/2, size, size);
         }
     }
+}
+
+function openLoading(){
+    $("loading").style.display = "flex";
+}
+function closeLoading(){
+    $("loading").style.display = "none";
 }

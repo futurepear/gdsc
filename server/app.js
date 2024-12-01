@@ -43,6 +43,9 @@ app.get("/login", (req, res) => {
 app.get("/editor", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/editor.html"));
 });
+app.get("/editor/:id", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/editor.html"));
+});
 app.get("/image", async (req, res) => {
     res.redirect(process.env.CDN_URL+"/poire.png");
     return;
@@ -60,8 +63,9 @@ app.post("/uploadFile", async (req, res) => {
 
     let title = req.query.title;
 
-    let file = "/pdfapp/files/" + uuidv4() + "/base.png";
-    let result = db.createFile(sql, title, user.username, null, null, file);
+    let id = uuidv4();
+    let file = "/pdfapp/files/" + id + "/base.png";
+    let result = db.createFile(sql, title, user.username, null, null, id);
     
     let response = await fetch(process.env.CDN_URL + file, {
         method: "PUT",
@@ -100,6 +104,11 @@ async function userFromSession(req) {
     return acc;
 }
 
+app.get("/filesList", async (req, res) => {
+    let category = req.query.category;
+    let results = await db.findFiles(sql);
+    res.send(JSON.stringify(results));
+});
 app.get("/api/my-info", async (req, res) => {
     let session = req.cookies["session"];
     let info = { loggedin: false, name: null };

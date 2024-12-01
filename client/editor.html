@@ -12,41 +12,90 @@
     
 
 
-    <link rel="stylesheet" href="styles/editor.css">
-    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="/styles/editor.css">
+    <link rel="stylesheet" href="/styles/index.css">
 </head>
 <body>
 
     <div id="outer" class="col">
-        <div id="navbar" class="flex" style="align-items: center; gap: 10px;">
+        <div id="navbar" class="flex" style="align-items: center; gap: 10px; height: 8%;">
             <h1 class="purpletext" style="line-height: 0px; margin-left: 20px;"><a href="/" class="pointer" style="text-decoration: none;">PDFapp</a></h1>
             <div class="filler"></div>
             <div style="height: 65%; aspect-ratio: 1/1; border-radius: 100%;" class="purplebg"></div>
             <p class="purpletext" id="username" style=""> </p>
             <p class="purpletext point" id="logout" onclick="logout()">Log Out</p>
+            <p class="purpletext point" id="login" onclick="gotologin()">Log in</p>
         </div>
-        <div id="content" class="flex center col">
-            <input id="pdf" type="file" accept=".pdf"/>
-            <button onclick="upload()">upload</button>
+        <div id="content" class="flex center col" style="">
+           
+            
             <div id="pages" class="flex">
 
             </div>
-            <div class="flex center" style="width: 100%; height: 100%;">
+          
+            <div class="flex center" style="width: 100%; height: 100%; justify-content: center;">
+                
                 <div class="tools glass col">
-
-                    <i class="bi bi-brush-fill"></i>
-                    <i class="bi bi-textarea-t"></i>
-                    <i class="bi bi-eraser"></i>
+                    <i class="bi bi-cursor-fill active" tool="pointer"></i>
+                    <i class="bi bi-brush-fill" tool="brush"></i>
+                    <i class="bi bi-textarea-t" tool="text"></i>
+                    <input type="color" id="color" style="width: 100%; padding: 0px;">
+                    <i class="bi bi-eraser" tool="eraser"></i>
                 </div>
-                <canvas id="editor"></canvas>
-                <div class="tools glass col"></div>
+                <div class="col center" style="height: 100%;">
+                    <div class="glass longtools center" style="height: 3%;">
+                        <div style="width: 1%;"></div>
+                        <input id="projectTitle" value="Untitled Project" />
+                        <div class="filler"></div>
+                        <button onclick="upload()" class="button4">UPLOAD</button>
+                        <div style="width: 1%;"></div>
+                    </div>
+                    <div class="glass longtools2 center" style="height: 3%;">
+                        <div style="width: 1%;"></div>
+                        <div id="brushTools" class="flex" style="display: none;">
+                            <p class="smalltext " style="color: white; font-weight: 400;">Brush Size</p><input id="brushSize" type="range" min="1" max="50" step="1" value="1" />
+                        </div>
+                        <div id="textTools" class="flex" style="display: none;">
+                            <p class="smalltext " style="color: white; font-weight: 400;">Font Size</p><input id="fontSize" type="range" min="1" max="100" step="1" value="20" />
+                        </div>
+                        <div class="filler"></div>
+                        <div style="width: 1%;"></div>
+                    </div>
+                    <canvas id="editor"></canvas>
+                </div>
+                <div class="tools glass col">
+                    <p style="margin: 0; text-align: center;">Layers</p>
+                    <div class="flex layerButton">
+                        <i class="bi bi-eye-fill"></i>
+                        <p>1 - Base Layer</p>
+                    </div>
+                    
+                </div>
+
             </div>
         </div>
     </div>
 
+    <div id="uploader" class="flex center" style="display: none;">
+        <div id="uploadMenu" class="flex col glass center">
+            <h2 class="purpletext">Upload a file to get started!</h2>
+            <p class="purpletext smalltext">Note: we only support the first page of PDFs right now.</p>
+            <hr class="purplebg"/>
+            <br />
+            <input id="pdf" type="file" accept=".pdf" />
+            <br />
+            <button class="button" onclick="closeUploader()">Or continue with an empty document</button>
+        </div>
+    </div>
+    
+    <div id="loading">
+        <img src="/img/file.png" id="loadingImage"/>
+        <p class="purpletext">Loading...</p>
+    </div>
+
     <canvas id="canvas"></canvas>
 
-    <script src="./js/main.js"></script>
-    <script src="./js/editor.js" type="module"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/editor.js" type="module"></script>
 </body>
 </html>

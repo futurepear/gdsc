@@ -50,8 +50,8 @@
                 <div id="filesNav" class="flex" style="align-items: center; gap: 10px;">
                     <h1 class="purpletext" id="explore">Explore Files</h1>
                     <div class="filler"></div>
-                    <button class="button3 point" onclick="create()">Create</button>
-                    <div class="filler"></div> 
+                    <button class="button3 point" style="display: none;" id="create" onclick="create()">Create</button>
+                    <div class="filler"></div>
                     <p class="purpletext">Sort</p> <button class="button">A-Z</button> <button class="button">></button>
                 </div>
                 <hr class="purplebg" />
@@ -64,6 +64,10 @@
     </div>
 
     <canvas id="canvas"></canvas>
+    <div id="loading">
+        <img src="/img/file.png" id="loadingImage" />
+        <p class="purpletext">Loading...</p>
+    </div>
 
     <script src="./js/main.js"></script>
     <script src="./js/index.js"></script>

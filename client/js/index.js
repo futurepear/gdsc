@@ -1,32 +1,51 @@
 
-function addFile() {
+function addFile(title, author, src) {
+    let id = src;
+    console.log(id);
     let html = `
-    <div class="file">
-        <img/>
-        <h2 class="purpletext">Title</h2>
-        <p class="purpletext">Author</p>
+    <div class="file" project=${id}>
+        <div class="div" style="background-image: url(https://r2.alupoaei.com/pdfapp/files/${src}/base.png)" project=${id}></div>
+        <h2 class="purpletext" project=${id}>${title}</h2>
+        <p class="purpletext">By: ${author}</p>
     </div>
     `;
     document.getElementById("files").innerHTML += html;
 }
 
+document.addEventListener("click", (e) => {
+    let project = e.target.getAttribute("project");
+    if (project == null) return;
+
+    window.location.href = "/editor/" + project;
+});
+
 function updateUserInfo(user) {
     $("username").innerHTML = user.name;
     $("logout").style.display = "block";
     $("login").style.display = "none";
+    $("create").style.display = "block";
 }
 
 async function updateUser() {
     let res = await fetch("/api/my-info");
     res = await res.json();
-    if (res.loggedin) updateUserInfo(res);
+    if (res.loggedin) {
+        updateUserInfo(res);
+        localStorage.setItem("username", res.name);
+    } else {
+        localStorage.removeItem("username");
+    }
 }
-function gotologin() {
-    window.location.href = "/login"
-}
-function populateFiles() {
-    for (let i = 0; i < 50; i++)
-        addFile();
+
+async function populateFiles() {
+    $("files").innerHTML = "";
+    openLoading();
+    let files = await fetch("/filesList");
+    files = await files.json();
+    for (let i in files) {
+        addFile(files[i].title, files[i].author, files[i].file);
+    }
+    closeLoading();
 }
 function create() {
     window.location.href = "/editor#upload"

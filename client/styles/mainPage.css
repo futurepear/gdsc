@@ -45,12 +45,14 @@ body {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    transition: background 0.1s;
 }
 
 .file {
     padding: 5px;
     width: calc(20% - 14px);
-    aspect-ratio: 1/1;
+    height: 30%;
+    min-height: 180px;
     display: flex;
     flex-direction: column;
     transition: background 3s;
@@ -62,11 +64,14 @@ body {
         transition: background 0.2s;
     }
 
-    .file img {
-        background: #AAA;
+    .file .div {
+        background: rgba(200, 200, 200, 0.4);
+        backdrop-filter: blur(5px);
         border: 2px solid #300076ff;
         flex: 1;
         width: 100%;
+        background-size: cover;
+        background-position: center;
     }
 
     .file h2 {

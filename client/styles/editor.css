@@ -10,24 +10,74 @@
     height: 100%;
 }
 #editor {
-    aspect-ratio: 612/792;
     background: white;
-    height: 90%;
+    height: 85%;
+    min-height: 1px;
+    aspect-ratio: 612/792;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
 }
 .tools {
     padding: 10px;
     border-radius: 20px;
-    margin: 20px;
+    margin: 20px 20px 0px 20px;
     text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
     color: white;
     gap: 10px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
     font-size: 1.2em;
 }
+.longtools {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    width: 100%;
+    gap: 10px;
+    padding-top: 4px;
+}
+.longtools2{
+    width: 100%;
+    gap: 10px;  
+}
 .tools i{
     transition: color 0.2s;
 }
 .tools i:hover{
     color: #9c9fefff;
+}
+#uploader{
+    z-index: 100;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+}
+#uploadMenu {
+    padding: 20px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    background-image: linear-gradient(135deg, #ad3ee355, rgba(0, 0, 0, 0));
+}
+.active{
+    color: #02e3fcff;
+}
+.layerButton {
+    border-top: 2px solid #7d64b0;
+    padding: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    transition: background 0.2s;
+    align-items: center;
+    gap: 10px;
+}
+.layerButton:hover{
+    background: rgba(0, 0, 0, 0.1);
+    
+}
+.layerButton p {
+    
+    font-size: 0.7em;
+    margin: 0;
 }
