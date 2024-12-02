@@ -1,3 +1,5 @@
+//THIS THING DOES NOTHING NOW CUZ I USE CLOUDFLARE WORKER INSTEAD
+
 const { S3, ListObjectsCommand, GetObjectCommand } = require('@aws-sdk/client-s3');
 const crypto = require('crypto');
 

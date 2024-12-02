@@ -53,6 +53,18 @@ async function login() {
     error("SUCCESS");
     window.location.href = "/";
 }
+
+function googleSignIn() {
+    const query = {
+        client_id: "499910070291-r9eg4fsor7v4arqb2i2h652l4tvodiu3.apps.googleusercontent.com",
+        redirect_uri: "http://localhost:3000/auth/google/google-callback/oauth/login",
+        response_type: "code",
+        scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile",
+    };
+    const url = new URL("https://accounts.google.com/o/oauth2/v2/auth");
+    url.search = new URLSearchParams(query).toString();
+    window.location.href = url.toString()
+}
 function makeSignup() {
     let html = `
         <p class="purpletext2 smalltext">Username</p>
