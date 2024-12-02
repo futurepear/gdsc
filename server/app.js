@@ -58,14 +58,8 @@ app.get("/image/*", async (req, res) => {
 app.get("/data/*", async (req, res) => {
     let destination = req.url.substring(6);
     let url = process.env.DIRECT_CDN_URL + "/pdfapp/files/" + destination;
-    //Too  lazy TO DEAL WITH CORS!!!!!!!!!!
-    if (process.env.NODE_ENV == "development") {
-        let f = await fetch(url);
-        Readable.fromWeb(f.body).pipe(res);
-    } else {
-        res.redirect(url);
-    }
-    
+   
+    res.redirect(url);
 });
 
 app.post("/oauth/google/verify", async (req, res) => {
@@ -240,7 +234,8 @@ app.get("/api/my-info", async (req, res) => {
     if (session == null) return res.send(JSON.stringify(info));
 
     let acc = (await db.getUserBySession(sql, session))[0];
-    if (acc !== null) {
+    
+    if (acc != null) {
         info.loggedin = true;
         info.name = acc.username;
     }
@@ -255,7 +250,7 @@ app.post("/api/login", async (req, res) => {
     }
     //check 2 - does user exist?
     let acc = (await db.getUser(sql, data.username))[0];
-    if (acc == null) return res.end(JSON.stringify({ "success": false, "reason": "bruh dis account no exist" }));
+    if (acc == null) return res.end(JSON.stringify({ "success": false, "reason": "Account does not exist" }));
     //check 3: for non dev login: check password
     let auth = await db.encrypt.compare(data.pass, acc.hash);
     if (!auth) return res.end(JSON.stringify({ "success": false, "reason": "Invalid password" }));
@@ -263,7 +258,7 @@ app.post("/api/login", async (req, res) => {
     //login success: set cookies
     let session = Buffer.from(data.username + "." + uuidv4()).toString('base64');
     res.cookie("session", session);
-    res.end(JSON.stringify({ "success": true, "reason": "GOod job!!" }));   
+    res.end(JSON.stringify({ "success": true, "reason": "Good job!!" }));   
     db.setSession(sql, data.username, session);
 });
 
