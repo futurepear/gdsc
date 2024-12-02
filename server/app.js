@@ -254,7 +254,7 @@ app.post("/api/login", async (req, res) => {
     }
     //check 2 - does user exist?
     let acc = (await db.getUser(sql, data.username))[0];
-    if (acc == null) return res.end(JSON.stringify({ "success": false, "reason": "bruh dis account no exist" }));
+    if (acc == null) return res.end(JSON.stringify({ "success": false, "reason": "Account does not exist" }));
     //check 3: for non dev login: check password
     let auth = await db.encrypt.compare(data.pass, acc.hash);
     if (!auth) return res.end(JSON.stringify({ "success": false, "reason": "Invalid password" }));
@@ -262,7 +262,7 @@ app.post("/api/login", async (req, res) => {
     //login success: set cookies
     let session = Buffer.from(data.username + "." + uuidv4()).toString('base64');
     res.cookie("session", session);
-    res.end(JSON.stringify({ "success": true, "reason": "GOod job!!" }));   
+    res.end(JSON.stringify({ "success": true, "reason": "Good job!!" }));   
     db.setSession(sql, data.username, session);
 });
 
