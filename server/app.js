@@ -236,6 +236,7 @@ app.get("/fileDetails/:id", async (req, res) => {
 });
 app.get("/api/my-info", async (req, res) => {
     let session = req.cookies["session"];
+    console.log(req.cookies);
     let info = { loggedin: false, name: null };
     if (session == null) return res.send(JSON.stringify(info));
 
