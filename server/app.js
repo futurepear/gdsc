@@ -267,7 +267,7 @@ app.post("/api/login", async (req, res) => {
     db.setSession(sql, data.username, session);
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
 
 //db.createUsersTable(sql);
 //db.createAccount(sql);
