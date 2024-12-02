@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const R2 = require("./r2.js");
 const { Readable } = require("stream");
+const oauth = require("./oauth2.js");
 
 const { neon } = require('@neondatabase/serverless');
 const sql = neon(`postgresql://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}/${process.env.PGDATABASE}?sslmode=require`);
@@ -44,6 +45,9 @@ app.get("/login", (req, res) => {
 app.get("/editor", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/editor.html"));
 });
+app.get("/auth/google/google-callback/oauth/login", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/oauth.html"));
+});
 app.get("/editor/:id", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/editor.html"));
 });
@@ -63,6 +67,33 @@ app.get("/data/*", async (req, res) => {
     }
     
 });
+
+app.post("/oauth/google/verify", async (req, res) => {
+    return;
+    let code = req.body;
+    let params = {
+        client_id: process.env.GOOGLE_CLIENT_ID,
+        client_secret: process.env.GOOGLE_SECRET,
+        code: code,
+        grant_type: "authorization_code",
+        redirect_uri: "http://localhost:3000/auth/google/google-callback/oauth/login",
+    };
+    const query = new URLSearchParams("");
+    for (let i in params)
+        query.append(i, params[i]);
+    
+    let url = "https://oauth2.googleapis.com/token?" + query.toString();
+
+    let result = await fetch(url, { method: "POST" });
+    result = await result.json();
+
+    if (result.id_token == null) return;
+
+    let user = await oauth.getUserFromToken(result.id_token);
+    console.log(user);
+    
+});
+
 app.delete("/file/:id", async (req, res) => {
     if (req.params.id == null) return;
     let id = req.params.id;
