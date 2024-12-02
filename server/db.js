@@ -43,6 +43,7 @@ async function createFilesTable(sql) {
 
     const result = await sql`CREATE TABLE files (
         uuid SERIAL PRIMARY KEY,
+        type BIT,
         title VARCHAR(30),
         author VARCHAR(30),
         created DATE,
@@ -52,14 +53,30 @@ async function createFilesTable(sql) {
     )`;
     console.log(result);
 }
-async function createFile(sql, title, author, course, category, file) {
-    const result = await sql`INSERT INTO files(title, author, created, class, category, file)
-        VALUES (${title}, ${author}, ${sqlDate()}, ${course}, ${category}, ${file});
+async function createFile(sql, title, author, course, category, file, type) {
+    let fileType = 0;
+    if (type == "edit") fileType = 1;
+    const result = await sql`INSERT INTO files(type, title, author, created, class, category, file)
+        VALUES (${fileType}, ${title}, ${author}, ${sqlDate()}, ${course}, ${category}, ${file});
+    `;
+    return result;
+}
+async function createFileEdit(sql, parentUUID, author, file) {
+    const result = await sql`INSERT INTO files(type, title, author, created, class, category, file)
+        VALUES (${1}, ${""}, ${author}, ${sqlDate()}, ${null}, ${parentUUID}, ${file});
     `;
     return result;
 }
 async function findFiles(sql) {
-    const results = await sql`SELECT * FROM files`;
+    const results = await sql`SELECT * FROM files WHERE type=CAST(0 AS BIT)`;
+    return results;
+}
+async function findFile(sql, id) {
+    const results = await sql`SELECT * FROM files WHERE file=${id}`;
+    return results[0];
+}
+async function findFullFileDetails(sql, id) {
+    const results = await sql`SELECT * FROM files WHERE category=${id} OR file=${id}`;
     return results;
 }
 function sqlDate() {
@@ -77,4 +94,4 @@ const encrypt = {
     }
 }
 
-module.exports = { createAccount, sqlDate, getUser, createUsersTable, setSession, createFilesTable, createFile, encrypt, getUserBySession, findFiles };
+module.exports = { createAccount, sqlDate, getUser, createUsersTable, setSession, createFilesTable, createFile, encrypt, getUserBySession, findFiles, createFileEdit, findFile, findFullFileDetails };

@@ -24,7 +24,7 @@ function logout() {
     document.cookie.split(";").forEach(cookie => {
         let a = cookie.indexOf("=");
         let name = a > -1 ? cookie.substring(0, a) : cookie;
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;";
     });
     localStorage.removeItem("username");
     window.location.reload();

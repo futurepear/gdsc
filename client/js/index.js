@@ -4,7 +4,7 @@ function addFile(title, author, src) {
     console.log(id);
     let html = `
     <div class="file" project=${id}>
-        <div class="div" style="background-image: url(https://r2.alupoaei.com/pdfapp/files/${src}/base.png)" project=${id}></div>
+        <div class="div" style="background-image: url(./image/${src}/base.png)" project=${id}></div>
         <h2 class="purpletext" project=${id}>${title}</h2>
         <p class="purpletext">By: ${author}</p>
     </div>

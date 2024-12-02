@@ -46,28 +46,30 @@
                     <div class="glass longtools center" style="height: 3%;">
                         <div style="width: 1%;"></div>
                         <input id="projectTitle" value="Untitled Project" />
+                        <p id="projectTitle2" class="lockedTitle"></p>
                         <div class="filler"></div>
-                        <button onclick="upload()" class="button4">UPLOAD</button>
+                        <button onclick="upload()" class="button4" id="upload">PUBLISH</button>
                         <div style="width: 1%;"></div>
                     </div>
                     <div class="glass longtools2 center" style="height: 3%;">
                         <div style="width: 1%;"></div>
                         <div id="brushTools" class="flex" style="display: none;">
-                            <p class="smalltext " style="color: white; font-weight: 400;">Brush Size</p><input id="brushSize" type="range" min="1" max="50" step="1" value="1" />
+                            <p class="smalltext " style="color: white; font-weight: 400;">Brush Size</p><input  class="range" id="brushSize" type="range" min="1" max="50" step="1" value="1" />
                         </div>
                         <div id="textTools" class="flex" style="display: none;">
-                            <p class="smalltext " style="color: white; font-weight: 400;">Font Size</p><input id="fontSize" type="range" min="1" max="100" step="1" value="20" />
+                            <p class="smalltext " style="color: white; font-weight: 400;">Font Size</p><input class="range" id="fontSize" type="range" min="1" max="100" step="1" value="20" />
                         </div>
                         <div class="filler"></div>
                         <div style="width: 1%;"></div>
                     </div>
                     <canvas id="editor"></canvas>
                 </div>
-                <div class="tools glass col">
+                <div class="tools glass col" id="layersList">
                     <p style="margin: 0; text-align: center;">Layers</p>
-                    <div class="flex layerButton">
+                    <div class="flex layerButton" id="baseLayer">
                         <i class="bi bi-eye-fill"></i>
                         <p>1 - Base Layer</p>
+
                     </div>
                     
                 </div>
@@ -78,9 +80,9 @@
 
     <div id="uploader" class="flex center" style="display: none;">
         <div id="uploadMenu" class="flex col glass center">
-            <h2 class="purpletext">Upload a file to get started!</h2>
-            <p class="purpletext smalltext">Note: we only support the first page of PDFs right now.</p>
-            <hr class="purplebg"/>
+            <h2 class="">Upload a file to get started!</h2>
+            <p class=" smalltext">Note: we only support the first page of PDFs right now.</p>
+            <hr class="whitebg"/>
             <br />
             <input id="pdf" type="file" accept=".pdf" />
             <br />
