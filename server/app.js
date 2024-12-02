@@ -59,9 +59,7 @@ app.get("/data/*", async (req, res) => {
     let destination = req.url.substring(6);
     let url = process.env.DIRECT_CDN_URL + "/pdfapp/files/" + destination;
    
-        res.redirect(url);
-    
-    
+    res.redirect(url);
 });
 
 app.post("/oauth/google/verify", async (req, res) => {
@@ -232,8 +230,6 @@ app.get("/fileDetails/:id", async (req, res) => {
 });
 app.get("/api/my-info", async (req, res) => {
     let session = req.cookies["session"];
-    console.log("a");
-    console.log(req.cookies);
     let info = { loggedin: false, name: null };
     if (session == null) return res.send(JSON.stringify(info));
 
