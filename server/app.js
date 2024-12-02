@@ -58,13 +58,9 @@ app.get("/image/*", async (req, res) => {
 app.get("/data/*", async (req, res) => {
     let destination = req.url.substring(6);
     let url = process.env.DIRECT_CDN_URL + "/pdfapp/files/" + destination;
-    //Too  lazy TO DEAL WITH CORS!!!!!!!!!!
-    if (process.env.NODE_ENV == "development") {
-        let f = await fetch(url);
-        Readable.fromWeb(f.body).pipe(res);
-    } else {
+   
         res.redirect(url);
-    }
+    
     
 });
 
@@ -236,12 +232,14 @@ app.get("/fileDetails/:id", async (req, res) => {
 });
 app.get("/api/my-info", async (req, res) => {
     let session = req.cookies["session"];
+    console.log("a");
     console.log(req.cookies);
     let info = { loggedin: false, name: null };
     if (session == null) return res.send(JSON.stringify(info));
 
     let acc = (await db.getUserBySession(sql, session))[0];
-    if (acc !== null) {
+    
+    if (acc != null) {
         info.loggedin = true;
         info.name = acc.username;
     }
